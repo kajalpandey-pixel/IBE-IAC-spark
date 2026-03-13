@@ -100,7 +100,7 @@ resource "aws_ecs_service" "app" {
   # Allow ECS to manage task definition updates independently from Terraform
   # CI/CD will update the task definition — Terraform manages everything else
   lifecycle {
-    ignore_changes = [ desired_count]
+    ignore_changes = [ desired_count, task_definition]
   }
 
   network_configuration {

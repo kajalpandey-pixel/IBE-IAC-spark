@@ -45,6 +45,7 @@ module "security_groups" {
   environment = var.environment
   vpc_id      = module.vpc.vpc_id
   vpc_cidr    = var.vpc_cidr
+  bastion_sg_id = "sg-0e175fff63c799716" //passing the bastion host SG created on the console
 }
 
 module "iam" {
@@ -115,6 +116,17 @@ module "rds" {
   db_name              = var.db_name
   db_username          = var.db_username
   db_password          = var.db_password
+}
+
+module "apigw" {
+  source       = "./modules/apigw"
+  project      = var.project
+  environment  = var.environment
+  alb_dns_name = module.alb.alb_dns_name
+}
+
+output "apigw_endpoint" {
+  value = module.apigw.api_endpoint
 }
 
 data "aws_caller_identity" "current" {}
