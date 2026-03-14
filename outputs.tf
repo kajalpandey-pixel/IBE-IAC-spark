@@ -82,3 +82,19 @@ output "jdbc_url" {
   description = "Ready-made Spring Boot JDBC URL"
   value       = "jdbc:postgresql://${module.rds.db_host}:${module.rds.db_port}/${module.rds.db_name}"
 }
+
+
+# outputs.tf (ROOT)
+
+output "cognito_user_pool_id" {
+  value = module.cognito.user_pool_id
+}
+
+output "cognito_client_id" {
+  # Change this from user_pool_client_id to match the module output name
+  value = module.cognito.client_id
+}
+
+output "cognito_identity_pool_id" {
+  value = module.cognito.identity_pool_id
+}
