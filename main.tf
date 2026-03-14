@@ -130,3 +130,8 @@ output "apigw_endpoint" {
 }
 
 data "aws_caller_identity" "current" {}
+
+module "cognito" {
+  source = "./modules/cognito"
+  env    = "dev"
+}
